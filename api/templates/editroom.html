@@ -1,0 +1,24 @@
+{% extends "template.html" %}
+{% block content %}
+    <h1>Edit Room</h1>
+    <form method="POST" class="w-400 mw-full">
+        <div class="form-group">
+            <label for="id" class="required">ID</label>
+            <input type="number" class="form-control" id="id" name="id" value="{{ room.id }}" required="required" disabled>
+        </div>
+
+        <div class="form-group">
+            <label for="number" class="required">Room Number</label>
+            <input type="text" class="form-control" id="number" name="number" value="{{ room.number }}" required="required">
+        </div>
+
+        <div class="form-group">
+            <label for="code" class="required">Code</label>
+            <input type="text" class="form-control" id="code" name="code" value="{{ room.code }}" required="required">
+        </div>
+
+        <button class="btn btn-secondary" type="submit">
+            <i class="fa-solid fa-pen"></i> Edit room
+        </button>
+    </form>
+{% endblock %}

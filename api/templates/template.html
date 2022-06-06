@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Meta tags -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+    <!-- Address bar theming -->
+    <meta name="theme-color" content="#111417">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#111417">
+
+    <!-- Fav and Title -->
+    <title>Keycard Management System</title>
+
+    <!-- Halfmoon styles -->
+    <link href="{{ url_for('static', filename='css/halfmoon-variables.css') }}" rel="stylesheet" />
+    <!-- Font awesome -->
+    <link href="{{ url_for('static', filename='fontawesome/css/all.css') }}" rel="stylesheet">
+    <!-- Custom styles -->
+    <link href="{{ url_for('static', filename='error/styles.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+</head>
+
+<body class="dark-mode" data-dm-shortcut-enabled="true" data-sidebar-shortcut-enabled="true">
+
+    <!-- Page wrapper start -->
+    <div id="page-wrapper" class="page-wrapper with-navbar with-sidebar with-navbar-fixed-bottom" data-sidebar-type="overlayed-sm-and-down">
+
+        <!-- Navbar start -->
+        <nav class="navbar">
+            <div class="navbar-content">
+                <button id="toggle-sidebar-btn" class="btn btn-action" type="button" onclick="halfmoon.toggleSidebar()">
+                    <i class="fa fa-bars"></i>
+                </button>
+            </div>
+            <a href="/" class="navbar-brand ml-10 ml-sm-20">
+                <i class="fa-solid fa-credit-card"></i>
+                <span class="d-none d-md-block ml-10">Keycard Management</span>
+            </a>
+            <div class="navbar-content ml-auto">
+                {% if current_user.is_authenticated %}
+                    <span class="mr-10">{{ current_user.name }}</span>
+                    <a href="/logout" class="btn mr-5" role="button"><i class="fa-solid fa-arrow-right-from-bracket"></i> Log out</a>
+                {% else %}
+                    <a href="/login" class="btn btn-primary mr-5" role="button"><i class="fa-solid fa-key"></i> Login</a>
+                {% endif %}
+                <button class="btn btn-action" type="button" onclick="halfmoon.toggleDarkMode()">
+                    <i class="fa-solid fa-moon"></i>
+                    <span class="sr-only">Toggle dark mode</span>
+                </button>
+            </div>
+        </nav>
+        <!-- Navbar end -->
+
+        <!-- Sidebar toggle -->
+        <div class="sidebar-overlay" onclick="halfmoon.toggleSidebar()"></div>
+
+        <!-- Sidebar start -->
+        <div class="sidebar">
+            <div class="sidebar-menu">
+            {% if current_user.is_authenticated %}
+                <a href="/" class="sidebar-link sidebar-link-with-icon {{ 'active' if page == "home" }}">
+                    <span class="sidebar-icon"><i class="fa-solid fa-house"></i></span>
+                    Home
+                </a>
+
+                <br/>
+                <h5 class="sidebar-title">Bookings</h5>
+                <div class="sidebar-divider"></div>
+                <a href="/bookings" class="sidebar-link sidebar-link-with-icon {{ 'active' if page == "bookings" }}">
+                    <span class="sidebar-icon"><i class="fa-solid fa-calendar-days"></i></span>
+                    View bookings
+                </a>
+                <a href="/newbooking" class="sidebar-link sidebar-link-with-icon {{ 'active' if page == "newbooking" }}">
+                    <span class="sidebar-icon"><i class="fa-solid fa-calendar-plus"></i></span>
+                    New booking
+                </a>
+                <a href="/replacekey" class="sidebar-link sidebar-link-with-icon {{ 'active' if page == "replacekey" }}">
+                    <span class="sidebar-icon"><i class="fa-solid fa-arrows-rotate"></i></span>
+                    Replace keycard
+                </a>
+
+                <br/>
+                <h5 class="sidebar-title">Rooms</h5>
+                <div class="sidebar-divider"></div>
+                <a href="/rooms" class="sidebar-link sidebar-link-with-icon {{ 'active' if page == "rooms" }}">
+                    <span class="sidebar-icon"><i class="fa-solid fa-door-open"></i></span>
+                    Room Management
+                </a>
+                <a href="/addroom" class="sidebar-link sidebar-link-with-icon {{ 'active' if page == "addroom" }}">
+                    <span class="sidebar-icon"><i class="fa-solid fa-plus"></i></span>
+                    Add Room
+                </a>
+                <a href="/reader" class="sidebar-link sidebar-link-with-icon {{ 'active' if page == "reader" }}">
+                    <span class="sidebar-icon"><i class="fa-solid fa-credit-card"></i></span>
+                    Keycard Reader
+                </a>
+
+                {% if current_user.admin %}
+                <br/>
+                <h5 class="sidebar-title">Admin</h5>
+                <div class="sidebar-divider"></div>
+                <a href="/users" class="sidebar-link sidebar-link-with-icon {{ 'active' if page == "users" }}">
+                    <span class="sidebar-icon"><i class="fa-solid fa-user"></i></span>
+                    View users
+                </a>
+                <a href="/adduser" class="sidebar-link sidebar-link-with-icon {{ 'active' if page == "adduser" }}">
+                    <span class="sidebar-icon"><i class="fa-solid fa-user-plus"></i></span>
+                    Add user
+                </a>
+                {% endif %}
+            {% else %}
+                <a href="/login" class="sidebar-link sidebar-link-with-icon {{ 'active' if page == "login" }}">
+                    <span class="sidebar-icon"><i class="fa-solid fa-key"></i></span>
+                    Login
+                </a>
+            {% endif %}
+            </div>
+        </div>
+        <!-- Sidebar end -->
+
+        <!-- Content wrapper start -->
+        <div class="content-wrapper">
+            <div class="container-fluid">
+                <div class="content">
+                    <div class="alert-container">
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                            {% if messages %}
+                                {% for category, message in messages %}
+                                    <div class="alert alert-{{ category }} mb-10" role="alert">
+                                        <button class="close" data-dismiss="alert" type="button" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                    </div>
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+        </div>
+        <!-- Content wrapper end -->
+
+        <!-- Navbar fixed bottom start -->
+        <nav class="navbar navbar-fixed-bottom">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a href="https://olly.ml/" target="_blank" class="nav-link">
+                        &copy; Copyright Olly 2022
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- Navbar fixed bottom end -->
+
+    </div>
+    <!-- Page wrapper end -->
+
+    <!-- Halfmoon JS -->
+    <script src="{{ url_for('static', filename='js/halfmoon.js') }}"></script>
+</body>
+
+</html>

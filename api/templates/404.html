@@ -1,0 +1,24 @@
+{% extends "template.html" %}
+{% block content %}
+    <div class="error-page">
+        <div class="error-bg error-404">
+            <div class="error-bg-overlay"></div>
+            <div class="error-animation"></div>
+            <div class="error-content">
+                <img src="{{ url_for('static', filename='error/icons/404.svg') }}">
+                <span class="error-title">404 Page Not Found</span>
+                <span class="error-message">This page could not be found on the server.</span>
+                <div class="error-options">
+                    <a href="javascript:window.history.go(-1);">
+                        <i class="fa-solid fa-arrow-left mr-5"></i>
+                        <span>Go Back</span>
+                    </a>
+                    <a href="/">
+                        <i class="fa-solid fa-house mr-5"></i>
+                        <span>Home</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

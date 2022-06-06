@@ -1,0 +1,32 @@
+{% extends "template.html" %}
+{% block content %}
+    <h1>Key Card for Booking {{ booking.id }}</h1>
+    <h5>Old Code: <code class="code">{{ booking.old_code }}</code></h5>
+    <h5>Current Code: <code class="code">{{ booking.current_code }}</code></h5>
+
+    <a class="btn mr-10" role="button" href="/bookings">
+        <i class="fa-solid fa-arrow-left mr-5"></i> Back to bookings
+    </a>
+    <button class="btn btn-primary" type="button" onclick="downloadKey()">
+        <i class="fa-solid fa-download mr-5"></i> Download key card
+    </button>
+
+    <script>
+        function downloadKey(){
+            const filename = "{{ booking.id }} - {{ booking.name }}.json"
+            let data = {
+                version: 1,
+                room: "{{ booking.room }}",
+                code: "{{ booking.current_code }}",
+                previous_code: "{{ booking.old_code }}"
+            }
+            let dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data, null, 2))
+            let downloadAnchor = document.createElement('a')
+            downloadAnchor.setAttribute("href", dataStr)
+            downloadAnchor.setAttribute("download", filename)
+            document.body.appendChild(downloadAnchor)
+            downloadAnchor.click()
+            downloadAnchor.remove()
+        }
+    </script>
+{% endblock %}

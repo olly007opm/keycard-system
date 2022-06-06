@@ -1,0 +1,24 @@
+{% extends "template.html" %}
+{% block content %}
+    <h1>New Booking</h1>
+    <form method="POST" class="w-400 mw-full">
+        <div class="form-group">
+            <label for="name" class="required">Name</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Name" required="required">
+        </div>
+
+        <div class="form-group">
+            <label for="room" class="required">Room Number</label>
+            <input type="text" class="form-control" id="room" name="room" placeholder="Room" required="required">
+        </div>
+
+        <div class="form-group">
+            <label for="phone" class="required">Phone Number</label>
+            <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone" required="required">
+        </div>
+
+        <button class="btn btn-primary" type="submit">
+            <i class="fa-solid fa-calendar-plus"></i> Create booking
+        </button>
+    </form>
+{% endblock %}

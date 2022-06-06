@@ -1,0 +1,14 @@
+{% extends "template.html" %}
+{% block content %}
+    <h1>Add Room</h1>
+    <form method="POST" class="w-400 mw-full">
+        <div class="form-group">
+            <label for="number" class="required">Room Number</label>
+            <input type="text" class="form-control" id="number" name="number" placeholder="Number" required="required">
+        </div>
+
+        <button class="btn btn-primary" type="submit">
+            <i class="fa-solid fa-plus"></i> Add Room
+        </button>
+    </form>
+{% endblock %}

@@ -1,0 +1,146 @@
+.error-page {
+    background: black;
+    color: white;
+}
+
+.error-bg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.error-animation, .error-bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.error-animation {
+    opacity: 0.25;
+    background-position: 50%;
+    background-repeat: repeat;
+    z-index: 20;
+}
+
+.error-bg-overlay {
+    opacity: 0.5;
+    z-index: 10;
+}
+
+.error-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 30;
+}
+
+.error-content img {
+    width: 20rem;
+}
+
+.error-title {
+    font-size: 3rem;
+}
+
+.error-message {
+    font-size: 1.5rem;
+}
+
+.error-options {
+    display: flex;
+    margin-top: 25px;
+}
+
+.error-options a {
+    margin: 0 10px;
+    padding: 5px 10px;
+    color: white;
+    text-decoration: none;
+    border: thin solid;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.error-options svg {
+    width: 30px;
+    margin-right: 10px;
+}
+
+
+/* Page specific classes */
+.error-403 > .error-animation {
+    background-image: url("/api/staticatic/error/pattern/diagonal.svg");
+    background-size: 50px;
+    animation: error-animation-n 60s linear infinite;
+}
+.error-403.error-bg { background-image: url("/api/staticatic/error/background/background1.svg"); }
+.error-403 > .error-bg-overlay { background: linear-gradient(225deg, #40c9ff, #e81cff); }
+
+
+.error-404 > .error-animation {
+    background-image: url("/api/staticatic/error/pattern/cross.svg");
+    background-size: 100px;
+    animation: error-animation-se 60s linear infinite;
+}
+.error-404.error-bg { background-image: url("/api/staticatic/error/background/background1.svg"); }
+.error-404 > .error-bg-overlay { background: linear-gradient(90deg, #ff0f7b, #f89b29); }
+
+
+.error-500 > .error-animation {
+    background-image: url("/api/staticatic/error/pattern/circuit.svg");
+    background-size: 500px;
+    animation: error-animation-sw 60s linear infinite;
+}
+.error-500.error-bg { background-image: url("/api/staticatic/error/background/background1.svg"); }
+.error-500 > .error-bg-overlay { background: linear-gradient(45deg, #ff1b6b, #45caff); }
+
+
+
+/* Overlay animations */
+@keyframes error-animation-n {
+    0% { background-position-y: 0; } to { background-position-y: -3000px; }
+}
+
+@keyframes error-animation-s {
+    0% { background-position-y: 0; } to { background-position-y: 3000px; }
+}
+
+@keyframes error-animation-e {
+    0% { background-position-x: 0; } to { background-position-x: 3000px; }
+}
+
+@keyframes error-animation-w {
+    0% { background-position-x: 0; } to { background-position-x: -3000px; }
+}
+
+@keyframes error-animation-ne {
+    0% { background-position-x: 0; background-position-y: 0; }
+    to { background-position-x: 3000px; background-position-y: -3000px; }
+}
+
+@keyframes error-animation-nw {
+    0% { background-position-x: 0; background-position-y: 0; }
+    to { background-position-x: -3000px; background-position-y: -3000px; }
+}
+
+@keyframes error-animation-se {
+    0% { background-position-x: 0; background-position-y: 0; }
+    to { background-position-x: 3000px; background-position-y: 3000px; }
+}
+
+@keyframes error-animation-sw {
+    0% { background-position-x: 0; background-position-y: 0; }
+    to { background-position-x: -3000px; background-position-y: 3000px; }
+}

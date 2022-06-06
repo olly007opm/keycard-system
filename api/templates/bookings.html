@@ -1,0 +1,65 @@
+{% extends "template.html" %}
+{% block content %}
+    <h1>Bookings</h1>
+
+    {% for booking in bookings %}
+        <div class="modal" id="delete-modal-{{ booking.id }}" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <h5 class="modal-title">Confirm delete</h5>
+                    <p>
+                        Are you sure you want to delete booking <strong>{{ booking.id }}</strong>?<br>
+                        <strong>Name:</strong> {{ booking.name }}<br>
+                        <strong>Room:</strong> {{ booking.room }}
+                    </p>
+                    <div class="text-right mt-20">
+                    <a href="#" class="btn mr-5" role="button">Cancel</a>
+                    <a href="/deletebooking/{{ booking.id }}" class="btn btn-danger" role="button">
+                        <i class="fa-solid fa-trash mr-5"></i> Delete booking
+                    </a>
+                </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    <div class="overflow-x-scroll">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Room</th>
+                    <th>Phone</th>
+                    <th>Previous Code</th>
+                    <th>Current Code</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for booking in bookings %}
+                <tr>
+                    <th>{{ booking.id }}</th>
+                    <th>{{ booking.name }}</th>
+                    <td>{{ booking.room }}</td>
+                    <td>{{ booking.phone }}</td>
+                    <td><code class="code">{{ booking.old_code }}</code></td>
+                    <td><code class="code">{{ booking.current_code }}</code></td>
+                    <td>
+                        <a role="button" class="btn btn-secondary" href="/editbooking/{{ booking.id }}">
+                            <i class="fa-solid fa-pen mr-5"></i> Edit booking
+                        </a>
+                        <a role="button" class="btn btn-danger mt-5 mt-md-0 ml-5" href="#delete-modal-{{ booking.id }}">
+                            <i class="fa-solid fa-trash mr-5"></i> Delete booking
+                        </a>
+                        {% if current_user.admin %}
+                            <a role="button" class="btn btn-primary mt-5 mt-md-0 ml-5" href="/viewkey/{{ booking.id }}">
+                                <i class="fa-solid fa-credit-card mr-5"></i> View keycard
+                            </a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "template.html" %}
+{% block content %}
+    <h1>Replace Key Card</h1>
+    <form method="POST" class="w-400 mw-full">
+        <div class="form-group">
+            <label for="room" class="required">Room Number</label>
+            <input type="text" class="form-control" id="room" name="room" placeholder="Room" required="required">
+        </div>
+
+        <div class="form-group">
+            <label for="name" class="required">Name</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Name" required="required">
+        </div>
+
+        <div class="form-group">
+            <label for="phone" class="required">Last 3 digits of phone number</label>
+            <input type="text" class="form-control" id="phone" name="phone" placeholder="Number" required="required">
+        </div>
+
+        <button class="btn btn-primary" type="submit">
+            <i class="fa-solid fa-arrows-rotate"></i> Replace keycard
+        </button>
+    </form>
+{% endblock %}

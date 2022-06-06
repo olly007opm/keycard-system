@@ -1,0 +1,41 @@
+{% extends "template.html" %}
+{% block content %}
+    <h1>Edit Booking</h1>
+    <form method="POST" class="w-400 mw-full">
+        <div class="form-group">
+            <label for="id" class="required">ID</label>
+            <input type="number" class="form-control" id="id" name="id" value="{{ booking.id }}" required="required" disabled>
+        </div>
+
+        <div class="form-group">
+            <label for="name" class="required">Name</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{ booking.name }}" required="required">
+        </div>
+
+        <div class="form-group">
+            <label for="room" class="required">Room Number</label>
+            <input type="text" class="form-control" id="room" name="room" value="{{ booking.room }}" required="required">
+        </div>
+
+        <div class="form-group">
+            <label for="phone" class="required">Phone Number</label>
+            <input type="text" class="form-control" id="phone" name="phone" value="{{ booking.phone }}" required="required">
+        </div>
+
+        <div class="form-group">
+            <label for="oldcode" class="required">Previous Code</label>
+            <input type="text" class="form-control" id="oldcode" name="oldcode" value="{{ booking.old_code }}" required="required">
+        </div>
+
+        <div class="form-group">
+            <label for="currcode" class="required">Current Code</label>
+            <input type="text" class="form-control" id="currcode" name="currcode" value="{{ booking.current_code }}" required="required">
+        </div>
+
+
+
+        <button class="btn btn-secondary" type="submit">
+            <i class="fa-solid fa-booking-pen"></i> Edit booking
+        </button>
+    </form>
+{% endblock %}
